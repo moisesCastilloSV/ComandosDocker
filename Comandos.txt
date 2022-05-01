@@ -1,0 +1,94 @@
+Instalar 
+dotnet tool install --global dotnet-ef -version 6.0.0
+ccrear los archivos para crear la tabla 
+dotnet ef migrations add MigracionSqlServerInicial --project TiendaServicios.Api.Libro
+
+crear tablas 
+dotnet ef database update --project TiendaServicios.Api.Libro
+
+
+ccrear los archivos para crear la tabla 
+dotnet ef migrations add MigracionPostgresInicial --project TiendaServicio.Api.Autor
+
+crear tablas code first
+dotnet ef database update --project TiendaServicio.Api.Autor
+o
+dotnet ef database update si estas dentro de la carpeta del proyecto
+
+https://hub.docker.com/_/microsoft-mssql-server?tab=description
+la imagen se descarga asi 
+docker pull mcr.microsoft.com/mssql/server
+
+Crear un contendor apartir de la imagen  Docker hub
+docker run --name sqlmoi -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=#2022#AdminCursos." -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest
+docker run --name postgres-moi -e POSTGRES_PASSWORD=#2022#AdminCursos. -d -p 5432:5432 postgres:latest
+docker run --name mysql.moi -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=#2022#AdminCursos. mysql:latest
+
+Entrar a la administracion de la base Postgres :
+docker exec -it postgres-moi bash
+psql -U postgres  --inicar seccion 
+\du --valida permisos 
+create database tiendalibroautor;
+\l  -saber las bases de datos existentes
+create database tiendalibroautor
+\c tiendalibroautor para entrar a la base
+\d ..saber las relaciones o las tablas en la base
+Entrar a la administracion de la base MYsql :
+docker exec -it mysql.moi bash
+mysql -uroot -p#2022#AdminCursos.  Conectarse 
+create database carritocompra;
+use carritocompra;
+show tables; --ver tablas
+
+
+lista los contenedores
+docker container list
+docker stop     "Primeros 3 numeros"
+docker rm -f    "Primeros 3 numeros"
+docker run -d dd3d931186ce -p 8080:80 mapeo de puertos
+docker run -p 80:80 -p 6044:6044 --name apiLbro -d dd3d931186ce
+
+
+Lista de imagenes 
+docker images 
+Eliminar imagenes
+docker rmi -f  e72ed5b78e61
+
+
+lanzar un conitener apartir de un archivo .yml 
+cd /home/luis/Escritorio/MicroServicio2/MicroServiceApi.Libro/
+cd /home/luis/Documentos/ImagenesDOcker/MicroServiceApi.Libro/TiendaServicios.Api.Libro/
+docker-compose -f docker-compose.yml up -d
+
+docker file 
+docker build -t apilibro:net6dev . "En miniscutla"
+
+Crea una red 
+docker network create microservicenet
+
+Listar una redes 
+docker network list
+
+desconexion de red 
+docker network disconnect IDNetwork  IDContainer
+Eliminar red
+docker network rm 15f25f2e358d
+
+
+
+Agrega un contenedor a la red
+docker network connect microservicenet e06
+
+inspeccionar una red
+docker network inspect microservicenet 
+
+
+
+Publicar la Imagen en DOcker hub
+
+
+
+
+docker build -f Servicios.api.Libreria/Dockerfile --force-rm -t  cursosmoises/serviciosapilibreria:latest .
+docker tag cursosmoises/serviciosapilibreria:latest cursosmoises/publicacion_v1
+docker push cursosmoises/serviciosapilibreria
