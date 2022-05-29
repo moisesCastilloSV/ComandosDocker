@@ -59,6 +59,15 @@ lanzar un conitener apartir de un archivo .yml
 cd /home/luis/Escritorio/MicroServicio2/MicroServiceApi.Libro/
 cd /home/luis/Documentos/ImagenesDOcker/MicroServiceApi.Libro/TiendaServicios.Api.Libro/
 docker-compose -f docker-compose.yml up -d
+o si estamos en la ruta del archivo 
+docker-compose up -d
+
+
+Publicar la Imagen en DOcker hub
+
+docker build -f Servicios.api.Libreria/Dockerfile --force-rm -t  cursosmoises/serviciosapilibreria:latest .
+docker tag cursosmoises/serviciosapilibreria:latest cursosmoises/publicacion_v1
+docker push cursosmoises/serviciosapilibreria
 
 docker file 
 docker build -t apilibro:net6dev . "En miniscutla"
@@ -84,11 +93,3 @@ docker network inspect microservicenet
 
 
 
-Publicar la Imagen en DOcker hub
-
-
-
-
-docker build -f Servicios.api.Libreria/Dockerfile --force-rm -t  cursosmoises/serviciosapilibreria:latest .
-docker tag cursosmoises/serviciosapilibreria:latest cursosmoises/publicacion_v1
-docker push cursosmoises/serviciosapilibreria
